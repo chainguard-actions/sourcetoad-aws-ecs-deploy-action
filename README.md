@@ -10,6 +10,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 |---------|-----|-----------------|
 | v1.1.6 | [`v1.1.6`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.6) | [`11af309`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/11af309ff35c8ba1a9306ca7a196419f6ddddc79) |
 | v1.1.7 | [`v1.1.7`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.7) | [`d142866`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/d142866e53334cfa5d562040d397483f14dde1f9) |
+| v1.1.8 | [`v1.1.8`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.8) | [`0356ad2`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/0356ad230bfd34821188ca5771ba91ebbaec8e9f) |
 | v1.1.9 | [`v1.1.9`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.9) | [`afc12ba`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/afc12bab31cb363bf293c9f25f3bc35b3c25fb57) |
 
 ## Privacy
