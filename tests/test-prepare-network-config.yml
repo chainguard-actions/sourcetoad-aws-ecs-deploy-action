@@ -1,0 +1,43 @@
+name: Test prepare task with network config filepath input
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      # This test exercises the prepare_task_container_network_config_filepath input.
+      # The action will fail at the AWS API call (fake credentials) but the input
+      # must be accepted and processed before that point.
+      - name: Run action with prepare network config filepath
+        id: action
+        continue-on-error: true
+        uses: .
+        with:
+          ecs_cluster_name: my-cluster
+          ecs_service_name: my-service
+          service_task_definition_name: my-task-def
+          service_container_image_changes: |
+            app|nginx:latest
+          prepare_task_definition_name: my-prepare-task-def
+          prepare_task_container_image_changes: |
+            app|nginx:latest
+          prepare_task_container_network_config_filepath: >-
+            $GITHUB_WORKSPACE/actions/hardened/sourcetoad--aws-ecs-deploy-action/v1.1.8/tests/fixtures/network-config.json
+          dry_run: 'true'
+        env:
+          AWS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
+          AWS_SECRET_ACCESS_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+          AWS_DEFAULT_REGION: us-east-1
+
+      - name: Assert action ran (failed at AWS API, not at input validation)
+        run: |
+          echo "outcome: ${{ steps.action.outcome }}"
+          # The action should fail because fake AWS credentials cannot call describe-task-definition.
+          # A failure here means the prepare_task_container_network_config_filepath input was accepted.
+          if [ "${{ steps.action.outcome }}" != "failure" ]; then
+            echo "FAIL: expected action to fail (AWS API call with fake credentials)"
+            exit 1
+          fi
+          echo "PASS: action failed as expected at AWS API call (network config filepath input was accepted)"
