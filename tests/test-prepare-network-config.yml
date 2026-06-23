@@ -1,0 +1,40 @@
+name: Test prepare task with network config filepath
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create network config JSON file
+        run: |
+          mkdir -p /tmp/ecs-test
+          cat > /tmp/ecs-test/network-config.json << 'EOF'
+          {
+            "awsvpcConfiguration": {
+              "subnets": ["subnet-12345678"],
+              "securityGroups": ["sg-12345678"],
+              "assignPublicIp": "DISABLED"
+            }
+          }
+          EOF
+
+      - id: action
+        uses: .
+        with:
+          ecs_cluster_name: my-cluster
+          ecs_service_name: my-service
+          service_task_definition_name: my-task-def
+          service_container_image_changes: |
+            app:nginx:latest
+          prepare_task_definition_name: my-prepare-task-def
+          prepare_task_container_image_changes: |
+            init:busybox:latest
+          prepare_task_container_network_config_filepath: /tmp/ecs-test/network-config.json
+          dry_run: 'true'
+
+      - name: Assert action completed with dry run
+        run: |
+          echo "Action completed successfully with prepare_task_container_network_config_filepath set"
+          echo "PASS"
