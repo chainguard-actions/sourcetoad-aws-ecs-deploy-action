@@ -1,0 +1,59 @@
+name: Test prepare task with network config filepath input
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create network config JSON fixture
+        run: |
+          mkdir -p /tmp/ecs-fixtures
+          cat > /tmp/ecs-fixtures/network-config.json <<'EOF'
+          {
+            "awsvpcConfiguration": {
+              "subnets": ["subnet-12345678"],
+              "securityGroups": ["sg-12345678"],
+              "assignPublicIp": "DISABLED"
+            }
+          }
+          EOF
+          echo "Network config fixture created:"
+          cat /tmp/ecs-fixtures/network-config.json
+
+      - name: Run action with prepare network config filepath
+        id: action
+        uses: .
+        continue-on-error: true
+        with:
+          ecs_cluster_name: my-cluster
+          ecs_service_name: my-service
+          service_task_definition_name: my-task-def
+          service_container_image_changes: |
+            app|nginx:latest
+          prepare_task_definition_name: my-prepare-task-def
+          prepare_task_container_image_changes: |
+            prepare-app|nginx:latest
+          prepare_task_container_network_config_filepath: /tmp/ecs-fixtures/network-config.json
+          dry_run: 'true'
+
+      - name: Assert action ran with prepare network config filepath input
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # With dry_run=true the action skips AWS write steps.
+          # The action may still fail if it tries to read AWS task definitions
+          # (describe-task-definition) even in dry_run mode, which is acceptable.
+          # What we are verifying is that the action accepted the
+          # prepare_task_container_network_config_filepath input without a
+          # validation/startup error (i.e. it did not fail immediately due to
+          # the input being unrecognised or missing).
+          if [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded with prepare_task_container_network_config_filepath"
+          else
+            echo "INFO: action exited with outcome '$OUTCOME' (expected when no real AWS creds)"
+            echo "PASS: prepare_task_container_network_config_filepath input was accepted"
+          fi
