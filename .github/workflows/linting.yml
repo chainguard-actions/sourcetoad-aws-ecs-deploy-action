@@ -1,0 +1,17 @@
+name: sourcetoad/aws-ecs-deploy-action
+on: push
+
+permissions:
+  contents: read
+
+jobs:
+  bash-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Lint Bash
+        uses: azohra/shell-linter@9e2d981d6bc5796573f4dc6e9e3a9e5a6e7b8c9d # latest
+        with:
+          path: '*.sh'
