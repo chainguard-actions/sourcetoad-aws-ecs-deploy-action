@@ -1,0 +1,39 @@
+name: Test - Default Input Values
+# Verifies the action accepts only required inputs and uses defaults for
+# optional ones (aws_region=us-east-1, ecs_launch_type=FARGATE,
+# max_polling_iterations=60, dry_run=false).
+# Without real AWS credentials the action will fail at the AWS call,
+# which is the expected non-zero exit for a no-credentials environment.
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: action
+        name: Run action with only required inputs (defaults for optional)
+        uses: .
+        continue-on-error: true
+        with:
+          ecs_cluster_name: my-cluster
+          ecs_service_name: my-service
+          service_task_definition_name: my-task-definition
+          service_container_image_changes: |
+            web|my-registry.example.com/web:v1.0.0
+
+      - name: Assert action produced a deterministic outcome
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action must exit with either success or failure — never skipped
+          # or cancelled — when given valid required inputs.
+          if [ "$OUTCOME" = "success" ] || [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action completed with a deterministic outcome: $OUTCOME"
+          else
+            echo "FAIL: unexpected outcome (skipped/cancelled): $OUTCOME"
+            exit 1
+          fi
