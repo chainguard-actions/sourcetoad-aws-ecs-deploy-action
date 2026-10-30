@@ -6,13 +6,13 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.1.6 | [`v1.1.6`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.6) | [`11af309`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/11af309ff35c8ba1a9306ca7a196419f6ddddc79) |
-| v1.1.7 | [`v1.1.7`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.7) | [`d142866`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/d142866e53334cfa5d562040d397483f14dde1f9) |
-| v1.1.8 | [`v1.1.8`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.8) | [`0356ad2`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/0356ad230bfd34821188ca5771ba91ebbaec8e9f) |
-| v1.1.9 | [`v1.1.9`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.9) | [`afc12ba`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/afc12bab31cb363bf293c9f25f3bc35b3c25fb57) |
-| v1.2.0 | [`v1.2.0`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.2.0) | [`f58c993`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/f58c993a0a91dae45bcefe3a409e8c241bd258c2) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.1.6 | [`v1.1.6`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.6) | [`11af309`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/11af309ff35c8ba1a9306ca7a196419f6ddddc79) | [`HARDENING.md`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/blob/v1.1.6/HARDENING.md) |
+| v1.1.7 | [`v1.1.7`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.7) | [`d142866`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/d142866e53334cfa5d562040d397483f14dde1f9) | [`HARDENING.md`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/blob/v1.1.7/HARDENING.md) |
+| v1.1.8 | [`v1.1.8`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.8) | [`0356ad2`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/0356ad230bfd34821188ca5771ba91ebbaec8e9f) | [`HARDENING.md`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/blob/v1.1.8/HARDENING.md) |
+| v1.1.9 | [`v1.1.9`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.1.9) | [`afc12ba`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/afc12bab31cb363bf293c9f25f3bc35b3c25fb57) | [`HARDENING.md`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/blob/v1.1.9/HARDENING.md) |
+| v1.2.0 | [`v1.2.0`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/tree/v1.2.0) | [`f58c993`](https://github.com/sourcetoad/aws-ecs-deploy-action/commit/f58c993a0a91dae45bcefe3a409e8c241bd258c2) | [`HARDENING.md`](https://github.com/chainguard-actions/sourcetoad-aws-ecs-deploy-action/blob/v1.2.0/HARDENING.md) |
 
 ## Privacy
 
